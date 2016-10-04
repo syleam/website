@@ -25,14 +25,12 @@
 from openerp import models, fields
 
 
-class WebsiteAdminProducts(models.TransientModel):
-    _name = 'website.admin.products'
-    _inherit = 'res.config.settings'
-    _description = 'Website Admin Products'
+class Website(models.Model):
+    _inherit = 'website'
 
-    website_id = fields.Many2one(comodel_name='website', string='website', required=True, default=lambda self: self.env['website'].search([], limit=1))
-    default_products_sorted_ok = fields.Boolean(string='Default Products Sorted', related='website_id.default_products_sorted_ok', help='Check this if you want change the default sort of the products')
-    products_sorted_ok = fields.Boolean(string='Products Sorted', related='website_id.products_sorted_ok', help='Check this if you want active in website the select field for sort products and manage them in backoffice')
-    field_product_line = fields.One2many(comodel_name='website.admin.products.sorted.line', inverse_name=None, related='website_id.field_product_line', string='Field Product Line', help='List of fields for select in shop page')
+    default_products_sorted_ok = fields.Boolean(string='Default Products Sorted', help='Field will be change if checkbox is checked in website.admin.products')
+    products_sorted_ok = fields.Boolean(string='Products Sorted', help='Field will be change if checkbox is checked in website.admin.products')
+    field_product_line = fields.One2many(comodel_name='website.admin.products.sorted.line', inverse_name='website_id', string='Field Product Line', help='List of fields for select in shop page')
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

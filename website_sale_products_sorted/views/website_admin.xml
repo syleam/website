@@ -43,10 +43,29 @@
                         <div class="oe_title">
                             <h1>Website Admin Products</h1>
                         </div>
-                        <div>
-                            <label for="default_products_sorted_ok" />
-                            <field name="default_products_sorted_ok" />
-                        </div>
+                            <div>
+                                <label for="default_products_sorted_ok" />
+                                <field name="default_products_sorted_ok" />
+                            </div>
+                            <div>
+                                <label for="products_sorted_ok" />
+                                <field name="products_sorted_ok" />
+                            </div>
+                        <notebook>
+                            <page string="Default Products Sorted" attrs="{'invisible':[('default_products_sorted_ok','=',False)]}" name="default_products_sorted">
+                                <div>
+                                    Hello World !
+                                </div>
+                            </page>
+                            <page string="Products Sorted" attrs="{'invisible':[('products_sorted_ok','=',False)]}" name="products_sorted">
+                                <field name="field_product_line" nolabel="1">
+                                    <tree string="Field Select Products Sorted Items" editable="bottom">
+                                        <field name="sequence" string="Sequence" required="1" />
+                                        <field name="field_product_id" string="Field Product" required="1" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>

@@ -24,17 +24,29 @@
         #
         ##############################################################################
 
+        <!-- Add template to sort product and diplay if checkbox 'products_sorted_ok' is checked in backoffice -->
         <template id="syleam_products" inherit_id="website_sale.products">
             <xpath expr="//t[@t-call='website.pager']" position="after">
-                <t t-call="website_sale_products_sorted.syleam_products_sorted" />
+                <t t-if="website.products_sorted_ok">
+                    <t t-call="website_sale_products_sorted.products_sorted" />
+                </t>
             </xpath>
         </template>
 
-        <template id="syleam_products_sorted">
+        <!-- Template for select field to sort products -->
+        <template id="products_sorted">
             <form class="pagination form-inline pull-right" action="/shop"  method="post">
                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                 <select class="form-control" name="order" onchange="this.parentNode.submit()">
                     <option value="0">default</option>
+                    <t t-foreach="website.field_product_line" t-as="fpl">
+                        <option t-att-value="fpl.field_product_id.name">
+                            <span t-field="fpl.field_product_id.field_description" /> -/+
+                        </option>
+                        <option t-att-value="fpl.field_product_id.name + ' DESC'">
+                            <span t-field="fpl.field_product_id.field_description" /> +/-
+                        </option>
+                    </t>
                 </select>
             </form>
         </template>

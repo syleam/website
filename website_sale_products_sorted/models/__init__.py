@@ -22,7 +22,9 @@
 #
 ##############################################################################
 
+import website
 import website_admin_products
+import website_admin_products_sorted_line
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
